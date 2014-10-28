@@ -50,4 +50,18 @@ describe RepackagingOrder do
     expect{RepackagingOrder.new(1299.99, :food)}.to raise_error
   end
   
+  
+  describe "calculates repackaging order estimate" do    
+    context "with flat markup only"  do
+      it "adds a flat markup of 5% to the base_price to any type of repackaging order"
+    end
+    
+    context "with extra markup on top of flat markup" do
+      it "adds only an extra markup of 1.2% per required_employees_quantity if the repackaging order is not of type 'food', 'drugs' or 'electronics'"
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 13% if the repackaging order is of type 'food'"
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 7.5% if the repackaging order is of type 'drugs'"
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 2% if the repackaging order is of type 'electronics'"
+    end
+  end
+  
 end
