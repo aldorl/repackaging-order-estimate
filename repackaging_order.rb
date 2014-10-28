@@ -15,4 +15,9 @@ class RepackagingOrder
     flat_markup_percentage = 0.05
     return (base_price*(1+flat_markup_percentage)).round(2)
   end
+  
+  def final_cost_estimate
+    total_extra_markup = 0.012 * required_employees_quantity
+    return (self.flat_markup*(1+total_extra_markup)).round(2)
+  end
 end
