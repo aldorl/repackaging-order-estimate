@@ -1,4 +1,10 @@
 class RepackagingOrder
+  FLAT_MARKUP_PERCENTAGE        = 0.05
+  EMPLOYEE_MARKUP_PERCENTAGE    = 0.012
+  FOOD_MARKUP_PERCENTAGE        = 0.13
+  DRUGS_MARKUP_PERCENTAGE       = 0.075
+  ELECTRONICS_MARKUP_PERCENTAGE = 0.02
+  
   attr_accessor :base_price, :type, :required_employees_quantity
   
   def initialize(base_price, type, required_employees_quantity = 1)
@@ -26,15 +32,15 @@ class RepackagingOrder
   end
   
   def final_cost_estimate
-    total_extra_markup_percentage = 0.012 * required_employees_quantity
+    total_extra_markup_percentage = EMPLOYEE_MARKUP_PERCENTAGE * required_employees_quantity
     
     case type
     when "food"
-      total_extra_markup_percentage += 0.13
+      total_extra_markup_percentage += FOOD_MARKUP_PERCENTAGE
     when "drugs"
-      total_extra_markup_percentage += 0.075
+      total_extra_markup_percentage += DRUGS_MARKUP_PERCENTAGE
     when "electronics"
-      total_extra_markup_percentage += 0.02
+      total_extra_markup_percentage += ELECTRONICS_MARKUP_PERCENTAGE
     end
     
     return calculate_cost_including_markup(flat_markup, total_extra_markup_percentage)
@@ -42,8 +48,7 @@ class RepackagingOrder
   
   private
     def flat_markup
-      flat_markup_percentage = 0.05
-      return calculate_cost_including_markup(base_price, flat_markup_percentage)
+      return calculate_cost_including_markup(base_price, FLAT_MARKUP_PERCENTAGE)
     end
     
     def calculate_cost_including_markup(base_price, markup_percentage)
