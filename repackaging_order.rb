@@ -11,23 +11,28 @@ class RepackagingOrder
     @required_employees_quantity = required_employees_quantity
   end
   
-  def flat_markup
-    flat_markup_percentage = 0.05
-    return (base_price*(1+flat_markup_percentage)).round(2)
-  end
-  
   def final_cost_estimate
-    total_extra_markup = 0.012 * required_employees_quantity
+    total_extra_markup_percentage = 0.012 * required_employees_quantity
     
     case type
     when "food"
-      total_extra_markup += 0.13
+      total_extra_markup_percentage += 0.13
     when "drugs"
-      total_extra_markup += 0.075
+      total_extra_markup_percentage += 0.075
     when "electronics"
-      total_extra_markup += 0.02
+      total_extra_markup_percentage += 0.02
     end
     
-    return (self.flat_markup*(1+total_extra_markup)).round(2)
+    return calculate_cost_including_markup(flat_markup, total_extra_markup_percentage)
   end
+  
+  private
+    def flat_markup
+      flat_markup_percentage = 0.05
+      return calculate_cost_including_markup(base_price, flat_markup_percentage)
+    end
+    
+    def calculate_cost_including_markup(base_price, markup_percentage)
+      (base_price*(1+markup_percentage)).round(2)
+    end
 end

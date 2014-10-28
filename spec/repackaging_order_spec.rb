@@ -59,18 +59,9 @@ describe RepackagingOrder do
       @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
     end
     
-    context "with flat markup only"  do
-      it "adds a flat markup of 5% to the base_price to any type of repackaging order" do
-        expect(@food_order.flat_markup).to        eq(1364.99) #1299.99  *1.05 rounded to 2 decimal places
-        expect(@drugs_order.flat_markup).to       eq(5703.6)  #5432.00  *1.05 rounded to 2 decimal places
-        expect(@books_order.flat_markup).to       eq(13079.8) #12456.95 *1.05 rounded to 2 decimal places
-        expect(@electronics_order.flat_markup).to eq(1364.99) #1299.99  *1.05 rounded to 2 decimal places
-      end
-    end
-    
     context "with extra markup on top of flat markup" do
       it "adds only an extra markup of 1.2% per required_employees_quantity if the repackaging order is not of type 'food', 'drugs' or 'electronics'" do
-        expect(@books_order.final_cost_estimate).to eq(13707.63) #(12456.95 *1.05 rounded to 2 decimal places) *(1 + 0.012*4)
+        expect(@books_order.final_cost_estimate).to eq(13707.63) #(12456.95 *1.05 round(2)) *(1 + 0.012*4) round(2)
       end
       
       it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 13% if the repackaging order is of type 'food'" do
