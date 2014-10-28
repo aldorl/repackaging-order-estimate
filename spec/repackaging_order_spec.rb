@@ -57,7 +57,13 @@ describe RepackagingOrder do
   
   
   describe "modify required_employees_quantity" do
-    it "adds one employee to the required_employees_quantity"
+    it "adds one employee to the required_employees_quantity" do
+      expect(@electronics_order.required_employees_quantity).to eq(1)
+      @electronics_order.increase_required_employees_quantity
+      expect(@electronics_order.required_employees_quantity).to eq(2)
+    end
+    
+    it "subtracts one employee from the required_employees_quantity"
     it "changes the required_employees_quantity to the given new_required_employees_quantity parameter"
   end
   
