@@ -73,9 +73,17 @@ describe RepackagingOrder do
         expect(@books_order.final_cost_estimate).to eq(13707.63) #(12456.95 *1.05 rounded to 2 decimal places) *(1 + 0.012*4)
       end
       
-      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 13% if the repackaging order is of type 'food'"
-      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 7.5% if the repackaging order is of type 'drugs'"
-      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 2% if the repackaging order is of type 'electronics'"
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 13% if the repackaging order is of type 'food'" do
+        expect(@food_order.final_cost_estimate).to eq(1591.58) #(1299.99  *1.05 round(2)) *(1 + 0.012*3 + 0.130) round(2)
+      end
+      
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 7.5% if the repackaging order is of type 'drugs'" do
+        expect(@drugs_order.final_cost_estimate).to eq(6199.81) #(5432.00  *1.05 round(2)) *(1 + 0.012*1 + 0.075) round(2)
+      end
+      
+      it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 2% if the repackaging order is of type 'electronics'" do
+        expect(@electronics_order.final_cost_estimate).to eq(1408.67) #(1299.99  *1.05 round(2)) *(1 + 0.012*1 + 0.020) round(2)
+      end
     end
   end
   
