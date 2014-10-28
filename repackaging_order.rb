@@ -18,6 +18,16 @@ class RepackagingOrder
   
   def final_cost_estimate
     total_extra_markup = 0.012 * required_employees_quantity
+    
+    case type
+    when "food"
+      total_extra_markup += 0.13
+    when "drugs"
+      total_extra_markup += 0.075
+    when "electronics"
+      total_extra_markup += 0.02
+    end
+    
     return (self.flat_markup*(1+total_extra_markup)).round(2)
   end
 end
