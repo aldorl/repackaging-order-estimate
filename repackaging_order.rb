@@ -15,6 +15,11 @@ class RepackagingOrder
     self.required_employees_quantity += 1
   end
   
+  def decrease_required_employees_quantity
+    raise "Cannot reduce the number of employees under one" if required_employees_quantity == 1
+    self.required_employees_quantity -= 1
+  end
+  
   def final_cost_estimate
     total_extra_markup_percentage = 0.012 * required_employees_quantity
     

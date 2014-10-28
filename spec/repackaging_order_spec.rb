@@ -70,15 +70,17 @@ describe RepackagingOrder do
       expect{@electronics_order.decrease_required_employees_quantity}.to raise_error
     end
     
-    it "changes the required_employees_quantity to the given new_required_employees_quantity parameter"
+    it "changes the required_employees_quantity to the given new_required_employees_quantity parameter" do
+      expect(@electronics_order.required_employees_quantity).to eq(1)
+      @electronics_order.modify_required_employees_quantity(3)
+      expect(@electronics_order.required_employees_quantity).to eq(3)
+      @electronics_order.modify_required_employees_quantity(1)
+      expect(@electronics_order.required_employees_quantity).to eq(1)
+    end
   end
   
   
   describe "calculates repackaging order estimate" do
-    before :all do
-      @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
-    end
-    
     context "with extra markup on top of flat markup" do
       it "adds only an extra markup of 1.2% per required_employees_quantity if the repackaging order is not of type 'food', 'drugs' or 'electronics'" do
         expect(@books_order.final_cost_estimate).to eq(13707.63) #(12456.95 *1.05 round(2)) *(1 + 0.012*4) round(2)
