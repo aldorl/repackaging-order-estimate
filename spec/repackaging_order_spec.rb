@@ -19,6 +19,7 @@ describe RepackagingOrder do
     expect(repackaging_order.required_employees_quantity).to eq(1)
   end
   
+  # Same as it "is valid with a base_price, a type and a required_employees_quantity"
   it "returns a required_employees_quantity equal to the given required_employees_quantity parameter" do
     repackaging_order = RepackagingOrder.new("1299.99", :food, 3)
     expect(repackaging_order.required_employees_quantity).to eq(3)
@@ -27,4 +28,9 @@ describe RepackagingOrder do
   it "is invalid with a required_employees_quantity parameter of less than 1" do
     expect{RepackagingOrder.new("1299.99", :food, -100)}.to raise_error
   end
+  
+  it "is invalid with a non-numeric base_price parameter" do
+    expect{RepackagingOrder.new(:test, :food)}.to raise_error
+  end
+  it "is invalid with a non-integer required_employees_quantity parameter"
 end
