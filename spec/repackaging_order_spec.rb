@@ -12,4 +12,9 @@ describe RepackagingOrder do
   it "is invalid without a base_price" do
     expect{RepackagingOrder.new(nil, :food)}.to raise_error 
   end
+  
+  # Every project has to have at least one person working on them by default
+  it "returns a required_employees_quantity of 1 when not given this parameter"
+  it "returns a required_employees_quantity equal to the given required_employees_quantity parameter"
+  it "is invalid with a required_employees_quantity parameter of less than 1"
 end
