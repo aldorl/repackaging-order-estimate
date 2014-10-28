@@ -38,4 +38,9 @@ describe RepackagingOrder do
     expect{RepackagingOrder.new(1299.99, :food, 4.2)}.to raise_error
     expect{RepackagingOrder.new(1299.99, :food, :test)}.to raise_error
   end
+  
+  it "is invalid with a non-string type parameter" do
+    expect{RepackagingOrder.new(1299.99, 123)}.to raise_error
+  end
+  
 end
