@@ -25,7 +25,6 @@ describe RepackagingOrder do
   end
   
   it "is invalid with a required_employees_quantity parameter of less than 1" do
-    repackaging_order = RepackagingOrder.new("1299.99", :food, -100)
-    expect(repackaging_order.required_employees_quantity).to raise_error
+    expect{RepackagingOrder.new("1299.99", :food, -100)}.to raise_error
   end
 end
