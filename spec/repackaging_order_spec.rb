@@ -3,6 +3,7 @@ require 'spec_helper'
 describe RepackagingOrder do
   it "is valid with a base_price and a type" do
     expect{RepackagingOrder.new(1299.99, :food)}.not_to raise_error
+    expect{RepackagingOrder.new(5432, :drugs)}.not_to raise_error
   end
   
   it "is invalid without a type" do
@@ -33,5 +34,8 @@ describe RepackagingOrder do
     expect{RepackagingOrder.new(:test, :food)}.to raise_error
   end
   
-  it "is invalid with a non-integer required_employees_quantity parameter"
+  it "is invalid with a non-integer required_employees_quantity parameter" do
+    expect{RepackagingOrder.new(1299.99, :food, 4.2)}.to raise_error
+    expect{RepackagingOrder.new(1299.99, :food, :test)}.to raise_error
+  end
 end
