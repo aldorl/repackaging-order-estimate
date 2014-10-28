@@ -30,6 +30,12 @@ describe RepackagingOrder do
     expect{RepackagingOrder.new(1299.99, "food", -100)}.to raise_error
   end
   
+  it "is invalid with a base_price parameter parameter equal or less than 0" do
+    expect{RepackagingOrder.new(0, "food")}.to raise_error
+    expect{RepackagingOrder.new(-0.01, "food")}.to raise_error
+    expect{RepackagingOrder.new(-100, "food")}.to raise_error
+  end
+  
   it "is invalid with a non-numeric base_price parameter" do
     expect{RepackagingOrder.new(:test, "food")}.to raise_error
   end
