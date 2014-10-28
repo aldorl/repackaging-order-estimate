@@ -8,7 +8,7 @@ describe RepackagingOrder do
     @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
   end
   
-  it "is valid with a base_price and a type" do
+  it "is valid with a numeric base_price value and a repackaging order type given as a string" do
     expect{RepackagingOrder.new(1299.99, "food")}.not_to raise_error
     expect{RepackagingOrder.new(5432, "drugs")}.not_to raise_error
   end
@@ -38,7 +38,6 @@ describe RepackagingOrder do
   it "is invalid with a base_price parameter parameter equal or less than 0" do
     expect{RepackagingOrder.new(0, "food")}.to raise_error
     expect{RepackagingOrder.new(-0.01, "food")}.to raise_error
-    expect{RepackagingOrder.new(-100, "food")}.to raise_error
   end
   
   it "is invalid with a non-numeric base_price parameter" do

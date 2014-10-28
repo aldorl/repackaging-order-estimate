@@ -8,22 +8,22 @@ class RepackagingOrder
   attr_accessor :base_price, :type, :required_employees_quantity
   
   def initialize(base_price, type, required_employees_quantity = 1)
-    #Instance variables
+    # Data types validation
     raise "Must have a numeric base_price value greater than 0" if base_price <= 0
     raise "Must have a type parameter given as a string" unless type.is_a?(String)
     raise "Must have an integer required_employees_quantity value equal or greater than 1" if !required_employees_quantity.is_a?(Integer) || required_employees_quantity < 1
+    #Instance variables
     @base_price = base_price
     @type = type
     @required_employees_quantity = required_employees_quantity
   end
   
   def increase_required_employees_quantity
-    self.required_employees_quantity += 1
+    modify_required_employees_quantity(required_employees_quantity+1)
   end
   
   def decrease_required_employees_quantity
-    raise "Cannot reduce the number of employees under one" if required_employees_quantity == 1
-    self.required_employees_quantity -= 1
+    modify_required_employees_quantity(required_employees_quantity-1)
   end
   
   def modify_required_employees_quantity(new_required_employees_quantity)
