@@ -51,6 +51,12 @@ describe RepackagingOrder do
   end
   
   
+  describe "modify required_employees_quantity"
+     it "adds one employee to the required_employees_quantity"
+     it "changes the required_employees_quantity to the given new_required_employees_quantity parameter"
+   end
+  
+  
   describe "calculates repackaging order estimate" do
     before :all do
       @food_order = RepackagingOrder.new(1299.99, "food", 3)
@@ -75,6 +81,12 @@ describe RepackagingOrder do
       it "adds an extra markup of 1.2% per required_employees_quantity and an extra markup of 2% if the repackaging order is of type 'electronics'" do
         expect(@electronics_order.final_cost_estimate).to eq(1408.67) #(1299.99  *1.05 round(2)) *(1 + 0.012*1 + 0.020) round(2)
       end
+    end
+    
+    context "with modified required_employees_quantity" do
+      it "adds an extra markup of 1.2% after adding one employee to the required_employees_quantity"
+      it "subtracts an extra markup of 1.2% after subtracting one employee from the required_employees_quantity"
+      it "includes an extra markup of 1.2% per required_employees_quantity after changing the required_employees_quantity to the given new_required_employees_quantity parameter"
     end
   end
   
