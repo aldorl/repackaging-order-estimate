@@ -10,4 +10,9 @@ class RepackagingOrder
     @type = type
     @required_employees_quantity = required_employees_quantity
   end
+  
+  def flat_markup
+    flat_markup_percentage = 0.05
+    return (base_price*(1+flat_markup_percentage)).round(2)
+  end
 end
