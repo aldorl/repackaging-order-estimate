@@ -20,6 +20,11 @@ class RepackagingOrder
     self.required_employees_quantity -= 1
   end
   
+  def modify_required_employees_quantity(new_required_employees_quantity)
+    raise "New required_employees_quantity has to be an integer value equal or greater than 1" if !new_required_employees_quantity.is_a?(Integer) || new_required_employees_quantity < 1
+    self.required_employees_quantity = new_required_employees_quantity
+  end
+  
   def final_cost_estimate
     total_extra_markup_percentage = 0.012 * required_employees_quantity
     

@@ -76,6 +76,8 @@ describe RepackagingOrder do
       expect(@electronics_order.required_employees_quantity).to eq(3)
       @electronics_order.modify_required_employees_quantity(1)
       expect(@electronics_order.required_employees_quantity).to eq(1)
+      expect{@electronics_order.modify_required_employees_quantity(-100)}.to raise_error
+      expect{@electronics_order.modify_required_employees_quantity(1.2)}.to raise_error
     end
   end
   
