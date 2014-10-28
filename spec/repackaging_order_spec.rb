@@ -102,9 +102,20 @@ describe RepackagingOrder do
     end
     
     context "with modified required_employees_quantity" do
-      it "adds an extra markup of 1.2% after adding one employee to the required_employees_quantity"
-      it "subtracts an extra markup of 1.2% after subtracting one employee from the required_employees_quantity"
-      it "includes an extra markup of 1.2% per required_employees_quantity after changing the required_employees_quantity to the given new_required_employees_quantity parameter"
+      it "adds an extra markup of 1.2% after adding one employee to the required_employees_quantity" do
+        @electronics_order.increase_required_employees_quantity
+        expect(@electronics_order.final_cost_estimate).to eq(1425.05) #(1299.99  *1.05 round(2)) *(1 + 0.012*2 + 0.020) round(2)
+      end
+      
+      it "subtracts an extra markup of 1.2% after subtracting one employee from the required_employees_quantity" do
+        @electronics_order.decrease_required_employees_quantity
+        expect(@electronics_order.final_cost_estimate).to eq(1408.67) #(1299.99  *1.05 round(2)) *(1 + 0.012*1 + 0.020) round(2)
+      end
+      
+      it "includes an extra markup of 1.2% per required_employees_quantity after changing the required_employees_quantity to the given new_required_employees_quantity parameter" do
+        @electronics_order.modify_required_employees_quantity(3)
+        expect(@electronics_order.final_cost_estimate).to eq(1441.43) #(1299.99  *1.05 round(2)) *(1 + 0.012*3 + 0.020) round(2)
+      end
     end
   end
   
