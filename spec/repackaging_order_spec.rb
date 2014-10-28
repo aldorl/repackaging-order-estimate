@@ -69,6 +69,10 @@ describe RepackagingOrder do
   
   
   describe "calculates repackaging order estimate" do
+    before :all do
+      @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
+    end
+    
     context "with extra markup on top of flat markup" do
       it "adds only an extra markup of 1.2% per required_employees_quantity if the repackaging order is not of type 'food', 'drugs' or 'electronics'" do
         expect(@books_order.final_cost_estimate).to eq(13707.63) #(12456.95 *1.05 round(2)) *(1 + 0.012*4) round(2)

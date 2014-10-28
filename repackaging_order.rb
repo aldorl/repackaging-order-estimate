@@ -11,6 +11,10 @@ class RepackagingOrder
     @required_employees_quantity = required_employees_quantity
   end
   
+  def increase_required_employees_quantity
+    self.required_employees_quantity += 1
+  end
+  
   def final_cost_estimate
     total_extra_markup_percentage = 0.012 * required_employees_quantity
     
