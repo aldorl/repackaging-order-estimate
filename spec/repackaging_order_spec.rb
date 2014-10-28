@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RepackagingOrder do
   it "is valid with a base_price and a type" do
-    expect{RepackagingOrder.new("1299.99", :food)}.not_to raise_error 
+    expect{RepackagingOrder.new("1299.99", :food)}.not_to raise_error
   end
   
   it "is invalid without a type" do
@@ -14,7 +14,11 @@ describe RepackagingOrder do
   end
   
   # Every project has to have at least one person working on them by default
-  it "returns a required_employees_quantity of 1 when not given this parameter"
+  it "returns a required_employees_quantity of 1 when not given this parameter" do
+    @repackaging_order = RepackagingOrder.new("1299.99", :food)
+    expect(@repackaging_order.required_employees_quantity).to eq(1)
+  end
+  
   it "returns a required_employees_quantity equal to the given required_employees_quantity parameter"
   it "is invalid with a required_employees_quantity parameter of less than 1"
 end
