@@ -51,9 +51,21 @@ describe RepackagingOrder do
   end
   
   
-  describe "calculates repackaging order estimate" do    
+  describe "calculates repackaging order estimate" do
+    before :all do
+      @food_order = RepackagingOrder.new(1299.99, "food", 3)
+      @drugs_order = RepackagingOrder.new(5432.00, "drugs")
+      @books_order = RepackagingOrder.new(12456.95, "books", 4)
+      @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
+    end
+    
     context "with flat markup only"  do
-      it "adds a flat markup of 5% to the base_price to any type of repackaging order"
+      it "adds a flat markup of 5% to the base_price to any type of repackaging order" do
+        expect(@food_order.flat_markup).to eq(1364.99)
+        expect(@drugs_order.flat_markup).to eq(5703.6)
+        expect(@books_order.flat_markup).to eq(13079.8)
+        expect(@electronics_order.flat_markup).to eq(1364.99)
+      end
     end
     
     context "with extra markup on top of flat markup" do
