@@ -1,6 +1,15 @@
 repackaging-order-estimate
 ==========================
 
+Instructions to run tests:
+
+1) In terminal, open the folder containing the project
+1.1) Run the command 'bundle install' if 'rspec gem' is not installed
+2) Run the command 'rspec spec'
+3) See the tests pass and enjoy!
+
+
+
 Project estimate calculator for repackaging orders for NuPack
 =============================================================
 

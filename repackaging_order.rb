@@ -14,7 +14,7 @@ class RepackagingOrder
     raise "Must have an integer required_employees_quantity value equal or greater than 1" if !required_employees_quantity.is_a?(Integer) || required_employees_quantity < 1
     #Instance variables
     @base_price = base_price
-    @type = type
+    @type = type.downcase
     @required_employees_quantity = required_employees_quantity
   end
   
