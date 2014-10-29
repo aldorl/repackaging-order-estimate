@@ -5,7 +5,9 @@ describe RepackagingOrder do
     @food_order = RepackagingOrder.new(1299.99, "food", 3)
     @drugs_order = RepackagingOrder.new(5432.00, "drugs")
     @books_order = RepackagingOrder.new(12456.95, "books", 4)
-    @electronics_order = RepackagingOrder.new(1299.99, "electronics", 1)
+    @electronics_order        = RepackagingOrder.new(1299.99, "electronics", 1)
+    @electronics_order_two    = RepackagingOrder.new(1299.99, "ELECTRONICS", 1)
+    @electronics_order_three  = RepackagingOrder.new(1299.99, "ElEcTrOnIcS", 1)
   end
   
   it "is valid with a numeric base_price value and a repackaging order type given as a string" do
@@ -52,6 +54,11 @@ describe RepackagingOrder do
   it "is invalid with a non-string type parameter" do
     expect{RepackagingOrder.new(1299.99, 123)}.to raise_error
     expect{RepackagingOrder.new(1299.99, :food)}.to raise_error
+  end
+  
+  it "returns the same type wheather given in lower case or caps" do
+    expect(@electronics_order.type).to eq(@electronics_order_two.type)
+    expect(@electronics_order_two.type).to eq(@electronics_order_three.type)
   end
   
   
